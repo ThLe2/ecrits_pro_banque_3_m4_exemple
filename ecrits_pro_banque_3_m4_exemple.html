@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Exemple commenté — Un mail à reprendre de fond en comble</title>
+<style>
+:root{--prune:#8C1E70;--prune-fonce:#5E1349;--prune-clair:#F4E6EE;--accent:#C77BAA;
+ --vert:#283C28;--gris:#3C3C3C;--gris-moyen:#8A7A85;--filet:#E8DCE5;--creme:#FAF6F8;
+ --ok:#2F7A4F;--ko:#B23B3B;--amb:#B5852A;}
+*{box-sizing:border-box}
+body{margin:0;background:var(--creme);color:var(--gris);
+ font-family:"Nunito","Segoe UI",Helvetica,Arial,sans-serif;font-size:16px;line-height:1.62}
+.wrap{max-width:900px;margin:0 auto;padding:0 18px 60px}
+header.bandeau{background:var(--prune-fonce);color:#fff;padding:18px 0;border-bottom:4px solid var(--accent)}
+header.bandeau .wrap{padding-bottom:0}
+.chapitre{font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:#EAD3E3}
+.chapitre span{color:var(--accent);margin:0 6px}
+h1{font-family:Georgia,"Times New Roman",serif;font-size:27px;line-height:1.25;margin:8px 0 4px;color:#fff}
+.sous{color:#EAD3E3;font-size:14.5px;margin:0}
+h2{font-family:Georgia,"Times New Roman",serif;font-size:20px;color:var(--prune-fonce);
+ margin:34px 0 0;padding-bottom:8px;border-bottom:2px solid var(--filet)}
+h2 .num{color:var(--accent);margin-right:8px}
+h3{font-size:15px;color:var(--vert);margin:20px 0 8px;letter-spacing:.02em}
+.carte{background:#fff;border:1px solid var(--filet);border-radius:10px;padding:20px 22px;margin:18px 0;
+ box-shadow:0 1px 2px rgba(94,19,73,.05)}
+.enc{background:var(--prune-clair);border-left:5px solid var(--prune);padding:14px 18px;
+ border-radius:0 8px 8px 0;margin:18px 0;font-size:15.2px}
+.enc .t{display:block;font-size:11.5px;letter-spacing:.11em;text-transform:uppercase;
+ font-weight:800;color:var(--prune-fonce);margin-bottom:6px}
+.enc.al{background:#FBF4F4;border-left-color:var(--ko)}.enc.al .t{color:var(--ko)}
+.enc.ci{background:#FCF8F0;border-left-color:var(--amb)}.enc.ci .t{color:#8A6418}
+.situ{background:#FCF9FB;border:1px dashed var(--filet);border-radius:8px;padding:16px 18px;margin:16px 0;font-size:15.2px}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+.duo>div{background:#fff;border:1px solid var(--filet);border-radius:9px;padding:15px 17px;font-size:14.8px}
+.duo .h{font-weight:800;color:var(--prune-fonce);margin-bottom:7px;font-size:14.5px}
+.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+.tri>div{background:#fff;border:1px solid var(--filet);border-radius:9px;padding:14px 15px;font-size:14.3px}
+.quad{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:16px 0}
+.quad>div{background:#fff;border:1px solid var(--filet);border-radius:9px;padding:12px 13px;font-size:13.6px}
+.quad .h{font-weight:800;color:var(--prune-fonce);margin-bottom:6px;font-size:13px;
+ text-transform:uppercase;letter-spacing:.04em}
+.tri .h{font-weight:800;color:var(--prune-fonce);margin-bottom:6px;font-size:13.5px;
+ text-transform:uppercase;letter-spacing:.05em}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.8px;background:#fff}
+th,td{border:1px solid var(--filet);padding:9px 12px;text-align:left}
+thead th{background:var(--prune-clair);color:var(--prune-fonce);font-size:13.5px}
+tbody th{font-weight:600;color:var(--gris)}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tr.tot td,tr.tot th{background:#FBF3F8;font-weight:800;color:var(--prune-fonce)}
+.dl{display:inline-flex;align-items:center;gap:9px;background:var(--prune);color:#fff;text-decoration:none;
+ padding:11px 20px;border-radius:8px;font-weight:700;font-size:15px;margin:20px 0 4px}
+.dl:hover{background:var(--prune-fonce)}
+ol.q{padding-left:0;list-style:none;counter-reset:q}
+ol.q>li{margin:16px 0;padding-left:38px;position:relative}
+ol.q>li::before{counter-increment:q;content:counter(q);position:absolute;left:0;top:1px;
+ width:26px;height:26px;border-radius:50%;background:var(--prune-clair);color:var(--prune-fonce);
+ font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center}
+b,strong{color:var(--vert)}
+footer{text-align:center;font-size:12.5px;color:var(--gris-moyen);padding:26px 18px 12px;
+ border-top:1px solid var(--filet);margin-top:44px}
+@media(max-width:860px){.quad{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.duo,.tri,.quad{grid-template-columns:1fr}h1{font-size:22px}}
+@media print{body{background:#fff}.dl{display:none}header.bandeau{background:#5E1349 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+.mail{background:#fff;border:1px solid var(--filet);border-radius:10px;padding:0;margin:16px 0;overflow:hidden}
+.mail .ent{background:#F7F1F5;border-bottom:1px solid var(--filet);padding:10px 16px;font-size:14px}
+.mail .ent b{color:var(--prune-fonce)}
+.mail .txt{padding:14px 18px;font-size:15.2px}
+.mail p{margin:0 0 10px}
+.err{background:#FDECEC;border-bottom:2px solid var(--ko);padding:0 2px;border-radius:3px}
+.cor{display:none;background:#E9F6EE;border-bottom:2px solid var(--ok);padding:0 2px;border-radius:3px;color:var(--ok);font-weight:700}
+.nf{font-size:11px;vertical-align:super;font-weight:800;color:var(--ko)}
+body.vu .err{text-decoration:line-through;background:none;border:0;color:var(--gris-moyen)}
+body.vu .cor{display:inline}
+.btn{display:inline-flex;align-items:center;gap:9px;background:var(--prune);color:#fff;border:0;
+ padding:12px 22px;border-radius:8px;font-family:inherit;font-weight:800;font-size:15px;cursor:pointer}
+.btn:hover{background:var(--prune-fonce)}
+.liste{display:none}body.vu .liste{display:block}
+
+.redac{width:100%;font-family:inherit;font-size:15px;line-height:1.6;padding:12px 14px;border:1.5px solid var(--filet);border-radius:9px;background:#fff;color:var(--gris);resize:vertical;box-sizing:border-box}
+.redac:focus{outline:none;border-color:var(--prune)}
+.redac[readonly]{background:#F1EBEF;color:var(--gris-moyen)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.aide{font-size:13px;color:var(--gris-moyen);margin:6px 0 12px}
+.vers{display:none}body.vu .vers{display:block}
+</style></head>
+<body>
+<header class="bandeau"><div class="wrap">
+ <div class="chapitre">Écrits professionnels · banque 3/5 <span>/</span> Module 4</div><h1>Un mail à reprendre de fond en comble</h1><p class="sous">Exemple commenté — Codes et conseils</p>
+</div></header>
+<div class="wrap">
+
+<h2><span class="num">1 ·</span>Le mail tel qu'il a été écrit</h2>
+<div class="carte">
+<p>Un conseiller relance une cliente dont le dossier de crédit est incomplet. Le fond est juste, mais la forme décourage la lecture et peut inquiéter. <b>HUIT POINTS</b> sont à reprendre. Repérez-les, puis affichez la version corrigée.</p>
+<div class="mail">
+ <div class="ent"><b>Objet :</b> <span class="err">Infos</span> <span class="cor">Votre demande de crédit – pièces manquantes</span><span class="nf">1</span></div>
+ <div class="txt"><p><span class="err">Bonjour,</span> <span class="cor">Bonjour Madame Roux,</span><span class="nf">2</span></p><p><span class="err">Suite à</span> <span class="cor">À la suite de</span><span class="nf">3</span> votre demande de crédit du 14 novembre, <span class="err">votre dossier a été étudié par nos services</span> <span class="cor">nous avons étudié votre dossier</span><span class="nf">4</span>.</p><p><span class="err">Nous ne pouvons pas traiter votre demande si vous ne nous envoyez pas</span> <span class="cor">Pour finaliser l'étude, il nous manque</span><span class="nf">5</span> deux pièces : votre dernier avis d'imposition et un justificatif de domicile de moins de trois mois.</p><p>Vous trouverez <span class="err">ci-jointe</span> <span class="cor">ci-joint</span><span class="nf">6</span> la liste complète des justificatifs. <span class="err">N'oubliez pas de</span> <span class="cor">Pensez à</span><span class="nf">7</span> joindre le devis des travaux.</p><p><span class="err">Sans réponse de votre part, nous ne pourrons pas vous faire d'offre.</span> <span class="cor">Dès réception de ces documents, j'étudierai votre demande et vous adresserai une réponse.</span><span class="nf">8</span></p><p>Je reste à votre écoute.</p><p>Belle journée,</p><p>Paul Brunet — Conseiller clientèle</p></div>
+</div>
+<div class="enc ci"><span class="t">À VOUS D'ABORD</span>Avant d'afficher la correction, réécrivez ce mail dans le cadre ci-dessous : corrigez les huit points que vous avez repérés. Vous comparerez ensuite votre version à la correction.</div>
+<textarea class="redac" id="maVersion" rows="14" spellcheck="false">Objet : Infos
+
+Bonjour,
+
+Suite à votre demande de crédit du 14 novembre, votre dossier a été étudié par nos services.
+
+Nous ne pouvons pas traiter votre demande si vous ne nous envoyez pas deux pièces : votre dernier avis d&#x27;imposition et un justificatif de domicile de moins de trois mois.
+
+Vous trouverez ci-jointe la liste complète des justificatifs. N&#x27;oubliez pas de joindre le devis des travaux.
+
+Sans réponse de votre part, nous ne pourrons pas vous faire d&#x27;offre.
+
+Je reste à votre écoute.
+
+Belle journée,
+
+Paul Brunet — Conseiller clientèle</textarea>
+<p class="aide" id="aideVoir">Le bouton s'active dès que vous avez modifié le mail.</p>
+<button class="btn" id="voir" disabled>Afficher la correction</button>
+</div>
+
+<div class="liste">
+<h2><span class="num">2 ·</span>Les corrections, une par une</h2>
+<div class="carte">
+<table><thead><tr><th>N°</th><th>Point</th><th>Le raisonnement</th></tr></thead><tbody><tr><td><b>1</b></td><td>objet</td><td>« Infos » ne dit rien : le mail risque de ne pas être ouvert. Un objet précis, de cinq à sept mots au maximum, avec un tiret pour préciser.</td></tr><tr><td><b>2</b></td><td>formule d'appel</td><td>On personnalise : « Bonjour Madame Roux, ».</td></tr><tr><td><b>3</b></td><td>« suite à »</td><td>« Suite à » est réservé à la langue commerciale relâchée : « À la suite de ».</td></tr><tr><td><b>4</b></td><td>voix active</td><td>La voix passive (« a été étudié par nos services ») éloigne le client. La voix active est plus directe : « nous avons étudié ».</td></tr><tr><td><b>5</b></td><td>forme affirmative et positive</td><td>« Nous ne pouvons pas… si vous ne… pas » : deux négations et une menace. On dit ce qui manque, sans négation.</td></tr><tr><td><b>6</b></td><td>ci-joint</td><td>Placé avant ce qui est joint, « ci-joint » reste invariable (recommandation de la capsule). On n'accorde que quand il suit le nom : « la liste ci-jointe ». La règle est identique pour « ci-annexé » et « ci-inclus ».</td></tr><tr><td><b>7</b></td><td>mot négatif</td><td>« N'oubliez pas » est une injonction négative. « Pensez à » dit la même chose positivement.</td></tr><tr><td><b>8</b></td><td>message positif</td><td>La dernière phrase menaçait le client. On annonce plutôt ce qui se passera, au futur, quand il aura répondu.</td></tr></tbody></table>
+</div>
+
+<h2><span class="num">3 ·</span>Ce qu'il faut en retenir</h2>
+<div class="carte"><div class="enc"><span class="t">CE QUE CE MAIL MONTRE</span>Aucune faute d'orthographe, et pourtant un mail inefficace : objet vide, ton négatif, client absent des phrases. La forme fait partie du message.</div><div class="enc al"><span class="t">CE QUE LA CLIENTE RETIENT</span>Avec la première version, Mme Roux comprend surtout qu'on la menace de refuser son crédit. Avec la seconde, elle sait exactement quoi envoyer et ce qui se passera ensuite.</div><div class="enc ci"><span class="t">LA MÉTHODE</span>Relisez votre mail en vous mettant à la place du client : chaque phrase négative peut se retourner en phrase positive, chaque passif en actif.</div></div>
+</div>
+
+
+<footer>TMK Performances - N° Siret : 49841924100027 - Code NAF : 8559A</footer>
+</div>
+<script>
+(function(){
+ const t=document.getElementById('maVersion'), b=document.getElementById('voir'), a=document.getElementById('aideVoir'), init=t.value;
+ t.addEventListener('input',()=>{ b.disabled = t.value.trim()===init.trim(); });
+ b.addEventListener('click',()=>{
+  t.readOnly=true; b.style.display='none'; a.textContent='Votre version est figée. Comparez-la à la correction affichée dans le mail ci-dessus et au tableau ci-dessous.';
+  document.body.classList.add('vu');
+ });
+})();
+</script>
+</body></html>
